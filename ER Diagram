@@ -1,0 +1,21 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+
+G = nx.DiGraph()
+
+G.add_edge("USER", "AUDIO_FILE", label="uploads")
+G.add_edge("AUDIO_FILE", "TRANSCRIPT", label="generates")
+G.add_edge("TRANSCRIPT", "SEMANTIC_SIMILARITY", label="compares")
+
+pos = nx.spring_layout(G)
+
+nx.draw(G, pos,
+        with_labels=True,
+        node_size=5000,
+        node_color='lightblue',
+        arrows=True)
+
+edge_labels = nx.get_edge_attributes(G,'label')
+nx.draw_networkx_edge_labels(G,pos,edge_labels=edge_labels)
+
+plt.show()
